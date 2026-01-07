@@ -1,16 +1,17 @@
 console.log("Script loaded");
-const form = document.getElementById("clientForm");
 
-form.addEventListener("submit", function(event) {
-  event.preventDefault(); // stop the page from reloading
+document.getElementById("clientForm").addEventListener("submit", function (e) {
+    e.preventDefault(); // stops page refresh
 
-  const name = document.getElementById("name").value;
-  const email = document.getElementById("email").value;
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
 
-  if(name === "" || email === "") {
-    alert("Please fill in all fields!");
-  } else {
-    alert("Form submitted successfully!");
-  }
+    if (name === "" || email === "") {
+        alert("Please fill in all fields");
+        console.log("Validation failed");
+    } else {
+        alert("Form submitted successfully");
+        console.log("Form submitted:", name, email);
+    }
 });
 

@@ -1,3 +1,4 @@
+console.log("Script loaded");
 const form = document.getElementById("clientForm");
 
 form.addEventListener("submit", function(event) {

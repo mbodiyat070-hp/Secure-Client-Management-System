@@ -23,6 +23,19 @@ listed in a table where they can be removed.
 
 Open `index.html` in any browser. No build step or dependencies.
 
+## Skills demonstrated
+
+- **Data validation** — trimmed input, required fields, length rules and an
+  email format check, each in its own testable function
+- **Secure coding habits** — output encoding with `textContent`, data
+  minimisation, graceful handling of corrupted storage
+- **JavaScript & the DOM** — event interception, rendering a list from
+  stored data, updating the page without reloading
+- **Testing discipline** — a written test plan ([TESTING.md](TESTING.md))
+  with 11 executed scenarios including security edge cases
+- **Honest scoping** — the limitations section says what a client-side
+  prototype can and cannot protect against
+
 ## How validation works
 
 Submission is intercepted with `preventDefault()`. Each field is trimmed and

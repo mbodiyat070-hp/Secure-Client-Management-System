@@ -30,6 +30,65 @@ function validateEmail(email) {
     return "";
 }
 
+// --- Client storage -------------------------------------------------------
+// Clients are kept in localStorage so the list survives a page refresh.
+// This is a stand-in for a real backend: in production this data would be
+// stored server-side behind authentication, never in the browser.
+
+const STORAGE_KEY = "clients";
+
+function loadClients() {
+    try {
+        return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+    } catch {
+        return []; // corrupted storage shouldn't break the page
+    }
+}
+
+function saveClients(clients) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(clients));
+}
+
+function renderClients() {
+    const clients = loadClients();
+    const table = document.getElementById("clientTable");
+    const rows = document.getElementById("clientRows");
+    const empty = document.getElementById("emptyMessage");
+
+    rows.replaceChildren();
+    table.hidden = clients.length === 0;
+    empty.hidden = clients.length !== 0;
+
+    clients.forEach(function (client, index) {
+        const row = document.createElement("tr");
+
+        // textContent (not innerHTML) so stored values are always treated
+        // as plain text — a client named "<script>..." renders harmlessly
+        // instead of executing (XSS protection).
+        const nameCell = document.createElement("td");
+        nameCell.textContent = client.name;
+
+        const emailCell = document.createElement("td");
+        emailCell.textContent = client.email;
+
+        const actionCell = document.createElement("td");
+        const removeButton = document.createElement("button");
+        removeButton.type = "button";
+        removeButton.className = "remove";
+        removeButton.textContent = "Remove";
+        removeButton.addEventListener("click", function () {
+            const updated = loadClients();
+            updated.splice(index, 1);
+            saveClients(updated);
+            renderClients();
+        });
+        actionCell.appendChild(removeButton);
+
+        row.append(nameCell, emailCell, actionCell);
+        rows.appendChild(row);
+    });
+}
+
 form.addEventListener("submit", function (e) {
     e.preventDefault(); // stop the page refreshing / submitting anywhere
 
@@ -48,6 +107,13 @@ form.addEventListener("submit", function (e) {
         return;
     }
 
-    success.textContent = "Client details are valid.";
+    const clients = loadClients();
+    clients.push({ name: name, email: email });
+    saveClients(clients);
+    renderClients();
+
+    success.textContent = "Client saved.";
     form.reset();
 });
+
+renderClients();

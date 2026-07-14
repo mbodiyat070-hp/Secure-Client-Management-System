@@ -83,3 +83,41 @@ button {
 button:hover {
   background-color: #094d86;
 }
+
+.clients {
+  margin-top: 32px;
+}
+
+.clients h2 {
+  font-size: 1.15rem;
+}
+
+#clientTable {
+  width: 100%;
+  border-collapse: collapse;
+  background: #ffffff;
+  border: 1px solid #d9e2ec;
+  border-radius: 8px;
+}
+
+#clientTable th,
+#clientTable td {
+  text-align: left;
+  padding: 8px 12px;
+  border-bottom: 1px solid #e4ebf2;
+}
+
+#emptyMessage {
+  color: #52606d;
+  font-size: 0.9rem;
+}
+
+button.remove {
+  background-color: #b3423a;
+  padding: 4px 10px;
+  font-size: 0.85rem;
+}
+
+button.remove:hover {
+  background-color: #93332d;
+}

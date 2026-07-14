@@ -1,14 +1,34 @@
 <!DOCTYPE html>
-<html>
-  <body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Secure Client Management System</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="container">
     <h1>Secure Client Management System</h1>
-    <form id="clientForm">
-      <label>Name:</label>
-      <input type="text" id="name"><br><br>
-      <label>Email:</label>
-      <input type="text" id="email"><br><br>
-      <button type="submit">Submit</button>
+    <p class="intro">A client-side prototype for collecting and validating client details safely.</p>
+
+    <form id="clientForm" novalidate>
+      <div class="field">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" autocomplete="name">
+        <span class="error" id="nameError"></span>
+      </div>
+
+      <div class="field">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" autocomplete="email">
+        <span class="error" id="emailError"></span>
+      </div>
+
+      <button type="submit">Add client</button>
+      <p class="success" id="formSuccess"></p>
     </form>
-    <script src="script.js"></script>
-  </body>
+  </main>
+
+  <script src="script.js"></script>
+</body>
 </html>
